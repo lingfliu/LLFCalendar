@@ -74,13 +74,12 @@ class ViewController: UIViewController {
     var weekCurrent = Date()
     
     @objc func onSwipeCalendar(_ gesture:UIPanGestureRecognizer) {
+        calendarView.selectDates([selectedDate])
         switch gesture.state {
         case.began:
-            calendarView.selectDates([selectedDate])
             calendarView.isUserInteractionEnabled = false
             break
         case.changed:
-            calendarView.selectDates([selectedDate])
             let offset = gesture.translation(in: calendarView)
             let offsetX = offset.x
             let offsetY = offset.y
@@ -88,49 +87,55 @@ class ViewController: UIViewController {
                 calendarView.isScrollEnabled = true
             }
             else {
-                calendarView.visibleDates()
                 calendarView.isScrollEnabled = false
-                if offsetY > 54 && calMode == .week {
-                    
-                    calFoldDepth = initWeekOfMonth()
-                    weekCurrent = firstDayOfSegment()
-                    
-                    calMode = .month
-                    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
-                        self.calendarView.reloadData()
-                        self.calendarView.scrollToDate(self.weekCurrent, animateScroll: false,completionHandler: {
-                            self.calendarView.selectDates([self.selectedDate])
-                        })
-                        self.calendarView.frame = CGRect(x:0,y:120,width:self.calendarView.frame.width,height:54*6)
-                        self.calendarView.transform = CGAffineTransform(translationX: 0, y: 0 - CGFloat(54)*CGFloat(self.calFoldDepth))
-                    }, completion: { (finished) in
-                        
-                    })
-                    offsetYCal = 0 - CGFloat(54)
-                }
-                
-                if calMode == .week {
-                    return
-                }
-                
-                if offsetY < 0 {
-                    if offsetYRec > 0 {
-                        self.recordListView.transform = CGAffineTransform(translationX: 0, y: offsetY+offsetYRec > 0 ? offsetY+offsetYRec : 0)
-                        
-                        self.calendarView.transform = CGAffineTransform(translationX:0, y: offsetY+offsetYCal > -54 ? offsetY+offsetYCal : -54)
-                        print("push offsetY =", offsetY, " offsetRec = ", offsetYRec, " offsetCal = ", offsetYCal)
+                if offsetY > 0 {
+                    //pull
+                    if calMode == .week {
+                        if offsetY > 54 {
+                            //switch to month mode
+                            //backup current for restore
+                            weekCurrent = firstDayOfSegment()
+                            calFoldDepth = initWeekOfMonth()
+                            calMode = .month
+                            
+                            UIView.animate(withDuration: 0.4, animations: {
+                                self.calendarView.reloadData()
+                                self.calendarView.scrollToDate(self.weekCurrent, animateScroll:false, completionHandler: {
+                                    self.calendarView.selectDates([self.selectedDate])
+                                })
+                                
+                                //transform finally goes here
+                                self.calendarView.transform = CGAffineTransform(translationX: 0, y: self.offsetYCal+offsetY > 0 ? 0 : self.offsetYCal+offsetY)
+                                self.recordListView.transform = CGAffineTransform(translationX: 0, y: offsetY+self.offsetYRec>54*6 ? 54*6 : offsetY+self.offsetYRec)
+                            })
+                            
+                            self.calendarView.frame = CGRect(x:0,y:120,width:self.calendarView.frame.width,height:54*6)
+                            self.calendarView.transform = CGAffineTransform(translationX: 0, y: 0 - CGFloat(54)*CGFloat(self.calFoldDepth))
+                            offsetYCal = 0-CGFloat(calFoldDepth)*CGFloat(54)
+                            offsetYRec = 0
+                        }
+                    }
+                    else {
+                        //in month mode, simply transform
+                        self.calendarView.transform = CGAffineTransform(translationX: 0, y: self.offsetYCal+offsetY > 0 ? 0 : self.offsetYCal+offsetY)
+                        self.recordListView.transform = CGAffineTransform(translationX: 0, y: offsetY+self.offsetYRec>54*6 ? 54*6 : offsetY+self.offsetYRec)
                     }
                 }
                 else {
-                    if offsetYRec < 54*6 {
-                        self.recordListView.transform = CGAffineTransform(translationX: 0, y: offsetY+offsetYRec < 54*6 ? offsetY+offsetYRec: 54*6)
+                    //push only works in month mode
+                    if calMode == .month {
+                        if offsetY+offsetYRec < CGFloat(calFoldDepth-1)*CGFloat(54) {
+                            //fold the calendar offset same as the recordlistview
+                            self.calendarView.transform = CGAffineTransform(translationX: 0, y: offsetY > 0-CGFloat(calFoldDepth)*CGFloat(54) ? offsetY : 0 - CGFloat(calFoldDepth)*CGFloat(54))
+                        }
                         
-                        self.calendarView.transform = CGAffineTransform(translationX:0, y: offsetY+offsetYCal-54 > 0 ? 0 : offsetY+offsetYCal-54)
-                        print("pull offsetY =", offsetY, " offsetRec = ", offsetYRec, " offsetCal = ", offsetYCal)
+                        self.recordListView.transform = CGAffineTransform(translationX: 0, y: offsetY+self.offsetYRec < 0 ? 0 : offsetY+self.offsetYRec)
                     }
                 }
-                
             }
+                
+//                        print("push offsetY =", offsetY, " offsetRec = ", offsetYRec, " offsetCal = ", offsetYCal)
+//                        print("pull offsetY =", offsetY, " offsetRec = ", offsetYRec, " offsetCal = ", offsetYCal)
 
 
             break
@@ -138,34 +143,53 @@ class ViewController: UIViewController {
             calendarView.isUserInteractionEnabled = true
             calendarView.isScrollEnabled = true
             
-
-            calendarView.selectDates([selectedDate])
             let offset = gesture.translation(in: calendarView)
             let offsetY = offset.y
             
-            offsetYRec += offsetY
-            if offsetYRec > 6*54 {
-                offsetYRec = 6*54
+            if calMode == .month {
+               
+                if offsetY > 0 {
+                    //pull
+                    offsetYRec += offsetY
+                    if offsetYRec > 6*54 {
+                        offsetYRec = 6*54
+                    }
+                    offsetYCal += offsetY
+                    if offsetYCal > 0 {
+                        offsetYCal = 0
+                    }
+                }
+                else {
+                    //push
+                    offsetYRec += offsetY
+                    if offsetYRec < 0 {
+                        offsetYRec = 0
+                    }
+                    
+                    if offsetYRec < CGFloat(calFoldDepth-1)*CGFloat(54) {
+                        offsetYCal =  offsetY > 0-CGFloat(calFoldDepth)*CGFloat(54) ? offsetY : 0 - CGFloat(calFoldDepth)*CGFloat(54)
+                    }
+                    else {
+                        offsetYCal = 0
+                    }
+                    
+                    if offsetYRec < 10 {
+                        //pushed back to week mode
+                        calMode = .week
+                        calendarView.reloadData()
+                        self.calendarView.scrollToDate(self.weekCurrent, animateScroll: false,completionHandler: {
+                            self.calendarView.selectDates([self.selectedDate])
+                        })
+                        calendarView.frame = CGRect(x:0,y:120,width:calendarView.frame.width,height:54)
+                        offsetYRec = 0
+                        offsetYCal = 0 - CGFloat(calFoldDepth)*CGFloat(54)
+                    }
+                }
             }
-            else if (offsetYRec < 0) {
+            else {
                 offsetYRec = 0
+                offsetYCal = 0 - CGFloat(calFoldDepth)*CGFloat(54)
             }
-
-            if offsetYRec < 55 {
-                calMode = .week
-                calendarView.reloadData()
-                self.calendarView.scrollToDate(self.weekCurrent, animateScroll: false,completionHandler: {
-                    self.calendarView.selectDates([self.selectedDate])
-                })
-                
-                calendarView.frame = CGRect(x:0,y:120,width:calendarView.frame.width,height:54)
-            }
-            
-            offsetYCal += offsetY
-            if offsetYCal > -54 {
-                offsetYCal = -54
-            }
-            
             break
         
         default:
@@ -179,12 +203,40 @@ class ViewController: UIViewController {
         switch calMode {
         case.week:
             calMode = .month
+            weekCurrent = firstDayOfSegment()
+            print (weekCurrent)
+            calFoldDepth = initWeekOfMonth()
+            calendarView.reloadData()
+            self.calendarView.scrollToDate(self.weekCurrent, animateScroll:false, completionHandler: {
+                self.calendarView.selectDates([self.selectedDate])
+            })
+            self.calendarView.frame = CGRect(x:0,y:120,width:self.calendarView.frame.width,height:54*6)
+            print("fold depth = ", self.calFoldDepth)
+            self.calendarView.transform = CGAffineTransform(translationX: 0, y: 0 - CGFloat(54)*CGFloat(self.calFoldDepth))
+            offsetYCal = 0-CGFloat(calFoldDepth)*CGFloat(54)
+            offsetYRec = 0
+            UIView.animate(withDuration: 0.8, animations: {
+                self.calendarView.transform = CGAffineTransform(translationX: 0, y: 0)
+                self.recordListView.transform = CGAffineTransform(translationX: 0, y: 54*6)
+            })
+            
             break
         case.month:
             calMode = .week
+            UIView.animate(withDuration: 0.8, animations: {
+                self.calendarView.transform =  CGAffineTransform(translationX: 0, y: 0 - CGFloat(54)*CGFloat(self.calFoldDepth))
+                self.recordListView.transform = CGAffineTransform(translationX: 0, y: 0)
+            }, completion: { (finished) in
+                self.calendarView.reloadData()
+                self.calendarView.frame = CGRect(x:0,y:120,width:self.calendarView.frame.width,height:54)
+                self.calendarView.scrollToDate(self.weekCurrent, animateScroll:false, completionHandler: {
+                    self.calendarView.selectDates([self.selectedDate])
+                })
+            })
+            
             break
         }
-        calendarView.reloadData()
+        
     }
     
     @IBAction func backToday(_ sender: Any) {
@@ -337,11 +389,15 @@ extension ViewController: JTAppleCalendarViewDelegate,JTAppleCalendarViewDataSou
     
     //which week should be the init display week of the month when the calendar is transferring from month to week mode
     func initWeekOfMonth() -> Int{
-        if isThisMonth() {
-            return calendarView.visibleDates().monthDates[0].date.weekOfMonth()-1
+        
+        if calendarView.visibleDates().indates.count > 0 {
+            return calendarView.visibleDates().indates[0].date.weekOfMonth() - 1
+        }
+        else if calendarView.visibleDates().monthDates.count > 0 {
+            return calendarView.visibleDates().monthDates[0].date.weekOfMonth() - 1
         }
         else {
-            return 0
+            return calendarView.visibleDates().outdates[0].date.weekOfMonth() - 1
         }
     }
     

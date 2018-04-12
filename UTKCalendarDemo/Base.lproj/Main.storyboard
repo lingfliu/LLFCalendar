@@ -21,49 +21,52 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JsQ-5G-EGB">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDG-k7-gOF">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDG-k7-gOF">
                                         <rect key="frame" x="256" y="49" width="39" height="30"/>
                                         <state key="normal" title="mode"/>
                                         <connections>
-                                            <action selector="switchMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PDk-6y-NEL"/>
+                                            <action selector="switchMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CSk-MU-VSu"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2C-aF-e8i">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2C-aF-e8i">
                                         <rect key="frame" x="105" y="49" width="39" height="30"/>
                                         <state key="normal" title="today"/>
                                         <connections>
-                                            <action selector="backToday:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wXd-Fj-ga7"/>
+                                            <action selector="backToday:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dfe-Q1-lW0"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13p-7F-Yow">
+                                        <rect key="frame" x="132" y="20" width="137" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="137" id="Uz9-1U-Trp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.4069552951388889" blue="0.44080946180555558" alpha="0.69028253424657537" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="s2C-aF-e8i" firstAttribute="baseline" secondItem="IDG-k7-gOF" secondAttribute="baseline" id="860-9F-nP4"/>
+                                    <constraint firstItem="13p-7F-Yow" firstAttribute="leading" secondItem="JsQ-5G-EGB" secondAttribute="leading" constant="132" id="1aU-kj-Oe6"/>
+                                    <constraint firstItem="s2C-aF-e8i" firstAttribute="top" secondItem="JsQ-5G-EGB" secondAttribute="top" constant="49" id="5dq-gd-nEj"/>
+                                    <constraint firstAttribute="trailing" secondItem="IDG-k7-gOF" secondAttribute="trailing" constant="80" id="GMP-9C-QFG"/>
+                                    <constraint firstItem="s2C-aF-e8i" firstAttribute="leading" secondItem="JsQ-5G-EGB" secondAttribute="leading" constant="105" id="Lwt-8M-BEB"/>
+                                    <constraint firstItem="s2C-aF-e8i" firstAttribute="top" secondItem="13p-7F-Yow" secondAttribute="bottom" constant="8" symbolic="YES" id="t7q-bI-G8p"/>
+                                    <constraint firstItem="s2C-aF-e8i" firstAttribute="baseline" secondItem="IDG-k7-gOF" secondAttribute="baseline" id="tgl-t9-WOQ"/>
                                     <constraint firstAttribute="height" constant="120" id="z5E-53-8Ul"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13p-7F-Yow">
-                                <rect key="frame" x="131" y="592" width="137" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="13p-7F-Yow" secondAttribute="trailing" constant="107" id="7SS-wg-SiC"/>
                             <constraint firstItem="JsQ-5G-EGB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RyW-zB-Cbd"/>
                             <constraint firstItem="JsQ-5G-EGB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="TCm-fp-oSQ"/>
                             <constraint firstItem="JsQ-5G-EGB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="axv-BQ-dgK"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="13p-7F-Yow" secondAttribute="bottom" constant="54" id="dp8-l3-dRE"/>
-                            <constraint firstItem="13p-7F-Yow" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="131" id="jbp-IF-90R"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="backTodayBtn" destination="s2C-aF-e8i" id="d96-kY-Owa"/>
                         <outlet property="dateLabel" destination="13p-7F-Yow" id="ogD-JJ-T73"/>
-                        <outlet property="modeSwitchBtn" destination="IDG-k7-gOF" id="chm-Cq-wwb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

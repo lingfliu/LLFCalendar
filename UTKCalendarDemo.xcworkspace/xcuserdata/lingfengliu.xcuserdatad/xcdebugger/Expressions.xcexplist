@@ -3,16 +3,24 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "ViewController.calendar(_:didScrollToDateSegmentWith:):ViewController.swift">
+         contextName = "ViewController.onSwipeCalendar(_:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.offsetYCal">
+            </PersistentString>
+            <PersistentString
+               value = "self.offsetYCal+offsetY &gt; 0">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "JTAppleCalendarView.handleSelectionValueChanged(_:action:indexPath:selectionType:shouldTriggerSelectionDelegate:):UICollectionViewDelegates.swift">
          <PersistentStrings>
             <PersistentString
-               value = "indexPath">
+               value = "collectionView.cellForItem(at:indexPath)">
             </PersistentString>
             <PersistentString
-               value = "collectionView.cellForItem(at:indexPath)">
+               value = "indexPath">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -23,6 +31,9 @@
                value = "calendarView.visibeDates">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.calendar(_:didScrollToDateSegmentWith:):ViewController.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
