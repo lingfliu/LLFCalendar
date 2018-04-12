@@ -1,0 +1,6 @@
+framework module Pods_UTKCalendarDemoTests {
+  umbrella header "Pods-UTKCalendarDemoTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ViewController.calendar(_:didScrollToDateSegmentWith:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "JTAppleCalendarView.handleSelectionValueChanged(_:action:indexPath:selectionType:shouldTriggerSelectionDelegate:):UICollectionViewDelegates.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath">
+            </PersistentString>
+            <PersistentString
+               value = "collectionView.cellForItem(at:indexPath)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.calendar(_:didDeselectDate:cell:cellState:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "calendarView.visibeDates">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
