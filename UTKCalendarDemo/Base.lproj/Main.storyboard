@@ -18,57 +18,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2C-aF-e8i">
-                                <rect key="frame" x="119" y="51" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="today"/>
-                                <connections>
-                                    <action selector="backToday:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wXd-Fj-ga7"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDG-k7-gOF">
-                                <rect key="frame" x="249" y="51" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="mode"/>
-                                <connections>
-                                    <action selector="switchMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PDk-6y-NEL"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13p-7F-Yow">
-                                <rect key="frame" x="119" y="479" width="137" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JsQ-5G-EGB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDG-k7-gOF">
+                                        <rect key="frame" x="256" y="49" width="39" height="30"/>
+                                        <state key="normal" title="mode"/>
+                                        <connections>
+                                            <action selector="switchMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PDk-6y-NEL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2C-aF-e8i">
+                                        <rect key="frame" x="105" y="49" width="39" height="30"/>
+                                        <state key="normal" title="today"/>
+                                        <connections>
+                                            <action selector="backToday:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wXd-Fj-ga7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.4069552951388889" blue="0.44080946180555558" alpha="0.69028253424657537" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="s2C-aF-e8i" firstAttribute="baseline" secondItem="IDG-k7-gOF" secondAttribute="baseline" id="860-9F-nP4"/>
+                                    <constraint firstAttribute="height" constant="120" id="z5E-53-8Ul"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13p-7F-Yow">
+                                <rect key="frame" x="131" y="592" width="137" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Nkw-oI-i0j" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
-                                <rect key="frame" x="0.0" y="120" width="375" height="300"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Q8C-nj-1A6">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Y79-SH-rnt" customClass="JTAppleCell" customModule="JTAppleCalendar">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="13p-7F-Yow" secondAttribute="trailing" constant="107" id="7SS-wg-SiC"/>
+                            <constraint firstItem="JsQ-5G-EGB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="RyW-zB-Cbd"/>
+                            <constraint firstItem="JsQ-5G-EGB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="TCm-fp-oSQ"/>
+                            <constraint firstItem="JsQ-5G-EGB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="axv-BQ-dgK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="13p-7F-Yow" secondAttribute="bottom" constant="54" id="dp8-l3-dRE"/>
+                            <constraint firstItem="13p-7F-Yow" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="131" id="jbp-IF-90R"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="backTodayBtn" destination="s2C-aF-e8i" id="d96-kY-Owa"/>
-                        <outlet property="calendarView" destination="Nkw-oI-i0j" id="YVv-18-Gjs"/>
                         <outlet property="dateLabel" destination="13p-7F-Yow" id="ogD-JJ-T73"/>
                         <outlet property="modeSwitchBtn" destination="IDG-k7-gOF" id="chm-Cq-wwb"/>
                     </connections>

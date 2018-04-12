@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ViewController.onSwipeCalendar(_:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "calendarView.isScrollEnabled ">
+            </PersistentString>
+            <PersistentString
+               value = "self.calendarView.transform">
+            </PersistentString>
+            <PersistentString
+               value = "offsetYCal">
+            </PersistentString>
+            <PersistentString
+               value = "recogs[1]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Date.nextWeek(day:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "calendar.date(from: dateComponents)">
+            </PersistentString>
+            <PersistentString
+               value = "dateComponents.weekOfYear">
+            </PersistentString>
+            <PersistentString
+               value = "self.weeksInYear()">
+            </PersistentString>
+            <PersistentString
+               value = "dateComponents.weekdOfYear">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Date.weeksInYear():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dateComponents.year">
+            </PersistentString>
+            <PersistentString
+               value = "dateComponents.yearForWeekOfYear">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.calendar(_:didScrollToDateSegmentWith:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.calendar(_:didSelectDate:cell:cellState:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "calMode">
+            </PersistentString>
+            <PersistentString
+               value = "cellState.dateBelongsTo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
