@@ -71,6 +71,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    var weekCurrent = Date()
+    
     @objc func onSwipeCalendar(_ gesture:UIPanGestureRecognizer) {
         switch gesture.state {
         case.began:
@@ -91,12 +93,18 @@ class ViewController: UIViewController {
                 if offsetY > 54 && calMode == .week {
                     
                     calFoldDepth = initWeekOfMonth()
+                    weekCurrent = firstDayOfSegment()
                     
                     calMode = .month
-                    UIView.animate(withDuration: 0.4, usingSrpingWithDamping:0.5f, animations: {
+                    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseIn, animations: {
                         self.calendarView.reloadData()
+                        self.calendarView.scrollToDate(self.weekCurrent, animateScroll: false,completionHandler: {
+                            self.calendarView.selectDates([self.selectedDate])
+                        })
                         self.calendarView.frame = CGRect(x:0,y:120,width:self.calendarView.frame.width,height:54*6)
                         self.calendarView.transform = CGAffineTransform(translationX: 0, y: 0 - CGFloat(54)*CGFloat(self.calFoldDepth))
+                    }, completion: { (finished) in
+                        
                     })
                     offsetYCal = 0 - CGFloat(54)
                 }
@@ -146,6 +154,10 @@ class ViewController: UIViewController {
             if offsetYRec < 55 {
                 calMode = .week
                 calendarView.reloadData()
+                self.calendarView.scrollToDate(self.weekCurrent, animateScroll: false,completionHandler: {
+                    self.calendarView.selectDates([self.selectedDate])
+                })
+                
                 calendarView.frame = CGRect(x:0,y:120,width:calendarView.frame.width,height:54)
             }
             
@@ -228,6 +240,8 @@ extension ViewController: JTAppleCalendarViewDelegate,JTAppleCalendarViewDataSou
         else {
             dateLabel.text = dateFormatter.string(for:visibleDates.monthDates[0].date)
         }
+        
+        weekCurrent = firstDayOfSegment()
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
@@ -328,6 +342,19 @@ extension ViewController: JTAppleCalendarViewDelegate,JTAppleCalendarViewDataSou
         }
         else {
             return 0
+        }
+    }
+    
+    //which week should be the init display week of the month when the calendar is transferring from month to week mode
+    func firstDayOfSegment() -> Date{
+        if calendarView.visibleDates().indates.count > 0 {
+            return calendarView.visibleDates().indates[0].date
+        }
+        else if calendarView.visibleDates().monthDates.count > 0 {
+            return calendarView.visibleDates().monthDates[0].date
+        }
+        else {
+            return calendarView.visibleDates().outdates[0].date
         }
     }
 }
