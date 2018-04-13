@@ -10,6 +10,48 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Test View Controller-->
+        <scene sceneID="sHV-fZ-a5K">
+            <objects>
+                <viewController id="uEs-Dr-Q0e" customClass="TestViewController" customModule="UTKCalendarDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cwb-Nj-NBO" customClass="UICollectionReusableView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABK-DU-wMe">
+                                <rect key="frame" x="168" y="40" width="39" height="30"/>
+                                <state key="normal" title="mode"/>
+                                <connections>
+                                    <action selector="switchMode:" destination="uEs-Dr-Q0e" eventType="touchUpInside" id="yfX-8v-iZf"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfv-dm-yQt">
+                                <rect key="frame" x="0.0" y="80" width="375" height="40"/>
+                                <color key="backgroundColor" red="1" green="0.044460720486111112" blue="0.083387586805555552" alpha="0.63225064212328763" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1Tc-Vz-Seb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nfv-dm-yQt" firstAttribute="trailing" secondItem="SzL-bJ-vrm" secondAttribute="trailing" id="002-R5-gRZ"/>
+                            <constraint firstItem="nfv-dm-yQt" firstAttribute="top" secondItem="ABK-DU-wMe" secondAttribute="bottom" constant="10" id="2cT-zd-kDd"/>
+                            <constraint firstItem="ABK-DU-wMe" firstAttribute="leading" secondItem="SzL-bJ-vrm" secondAttribute="leading" constant="168" id="RbP-GN-UEY"/>
+                            <constraint firstItem="nfv-dm-yQt" firstAttribute="leading" secondItem="SzL-bJ-vrm" secondAttribute="leading" id="i8Z-IJ-YB3"/>
+                            <constraint firstItem="SzL-bJ-vrm" firstAttribute="trailing" secondItem="ABK-DU-wMe" secondAttribute="trailing" constant="168" id="pt8-EL-6Mv"/>
+                            <constraint firstItem="ABK-DU-wMe" firstAttribute="top" secondItem="SzL-bJ-vrm" secondAttribute="top" constant="20" id="rFh-pl-oUQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SzL-bJ-vrm"/>
+                    </view>
+                    <connections>
+                        <outlet property="modeBtn" destination="ABK-DU-wMe" id="b7J-rq-cT8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="drR-Ml-afd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-762.39999999999998" y="160.56971514242881"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>

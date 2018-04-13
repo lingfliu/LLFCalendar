@@ -3,6 +3,31 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "ViewController.calendar(_:didScrollToDateSegmentWith:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.initWeekOfMonth():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.calendarView.visibleDates()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.switchMode(_:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Date.weeksInYear():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dateComponents.year">
+            </PersistentString>
+            <PersistentString
+               value = "dateComponents.yearForWeekOfYear">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ViewController.onSwipeCalendar(_:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -10,6 +35,9 @@
             </PersistentString>
             <PersistentString
                value = "self.calendarView.transform">
+            </PersistentString>
+            <PersistentString
+               value = "offsetYRec">
             </PersistentString>
             <PersistentString
                value = "offsetYCal">
@@ -37,20 +65,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Date.weeksInYear():ViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "dateComponents.year">
-            </PersistentString>
-            <PersistentString
-               value = "dateComponents.yearForWeekOfYear">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ViewController.calendar(_:didScrollToDateSegmentWith:):ViewController.swift">
-      </ContextState>
-      <ContextState
          contextName = "ViewController.calendar(_:didSelectDate:cell:cellState:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -58,6 +72,36 @@
             </PersistentString>
             <PersistentString
                value = "cellState.dateBelongsTo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #5 in ViewController.switchMode(_:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TestViewController.viewDidLoad():TestViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "viewWrapper">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TestViewController.switchMode(_:):TestViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.viewWrapper.transform">
+            </PersistentString>
+            <PersistentString
+               value = "self.viewWrapper.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.firstDayOfSegment():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.calendarView.visibleDates()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -16,6 +16,7 @@
 		4CA29EA8207EE7BD002C7F74 /* UTKCalendarDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA29EA7207EE7BD002C7F74 /* UTKCalendarDemoUITests.swift */; };
 		4CA29EB6207F09CF002C7F74 /* UTKUICalendarCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA29EB5207F09CF002C7F74 /* UTKUICalendarCellView.swift */; };
 		4CA29EB8207F09DD002C7F74 /* UTKUICalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CA29EB7207F09DD002C7F74 /* UTKUICalendarCell.xib */; };
+		91F80F4C20809AFE00C58EFB /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F80F4B20809AFE00C58EFB /* TestViewController.swift */; };
 		BF7E908C6443E07030F8E728 /* Pods_UTKCalendarDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19196350A194550F325D268 /* Pods_UTKCalendarDemo.framework */; };
 		D59CAB19526328D35CD7B419 /* Pods_UTKCalendarDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD7C78547A5506AC94CC9D6 /* Pods_UTKCalendarDemoTests.framework */; };
 		DE925C1EA99E1618816DE0FD /* Pods_UTKCalendarDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0FBA907C7CC4CFB9F21EE4E /* Pods_UTKCalendarDemoUITests.framework */; };
@@ -59,6 +60,7 @@
 		4CA29EB7207F09DD002C7F74 /* UTKUICalendarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UTKUICalendarCell.xib; sourceTree = "<group>"; };
 		73537B9E364E68D1CA3E4E0C /* Pods-UTKCalendarDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UTKCalendarDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-UTKCalendarDemo/Pods-UTKCalendarDemo.release.xcconfig"; sourceTree = "<group>"; };
 		74AF27C5E511BE94A710A3D4 /* Pods-UTKCalendarDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UTKCalendarDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UTKCalendarDemo/Pods-UTKCalendarDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		91F80F4B20809AFE00C58EFB /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		A19196350A194550F325D268 /* Pods_UTKCalendarDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UTKCalendarDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4D0B2F1C543B3432A201CE2 /* Pods-UTKCalendarDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UTKCalendarDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UTKCalendarDemoTests/Pods-UTKCalendarDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E0FBA907C7CC4CFB9F21EE4E /* Pods_UTKCalendarDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UTKCalendarDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +151,7 @@
 				4CA29E93207EE7BD002C7F74 /* Info.plist */,
 				4CA29EB5207F09CF002C7F74 /* UTKUICalendarCellView.swift */,
 				4CA29EB7207F09DD002C7F74 /* UTKUICalendarCell.xib */,
+				91F80F4B20809AFE00C58EFB /* TestViewController.swift */,
 			);
 			path = UTKCalendarDemo;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 			files = (
 				4CA29EB6207F09CF002C7F74 /* UTKUICalendarCellView.swift in Sources */,
 				4CA29E8A207EE7BD002C7F74 /* ViewController.swift in Sources */,
+				91F80F4C20809AFE00C58EFB /* TestViewController.swift in Sources */,
 				4CA29E88207EE7BD002C7F74 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
