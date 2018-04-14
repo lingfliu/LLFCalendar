@@ -170,11 +170,21 @@ class ViewController: UIViewController {
                     offsetYRec = offsetY + offsetYRec < 0 ? 0 : offsetY + offsetYRec
                     offsetYCal = offsetYRec - CGFloat(calFoldDepth)*CGFloat(54) > 0 ? 0 : offsetYRec - CGFloat(calFoldDepth)*CGFloat(54)
                     
+                    var dateToScroll:Date?
+                    if isDateInCurrentSegment(date: self.selectedDate) {
+                        dateToScroll = self.selectedDate
+                    }
+                    else {
+                        dateToScroll = self.weekCurrent
+                    }
+                    
                     if offsetYRec < 10 {
                         //pushed back to week mode
                         calMode = .week
                         calendarView.reloadData()
-                        self.calendarView.scrollToDate(self.weekCurrent, animateScroll: false,completionHandler: {
+                        self.calendarView.scrollToDate(dateToScroll!, animateScroll: false,completionHandler: {
+                            
+                            
                             self.calendarView.selectDates([self.selectedDate])
                             self.weekCurrent = self.firstDayOfSegment()
                             self.calFoldDepth = self.initWeekOfMonth()
@@ -217,14 +227,25 @@ class ViewController: UIViewController {
             
             self.calendarView.transform = CGAffineTransform(translationX: 0, y: 0-CGFloat(self.calFoldDepth*54))
             
+            var dateToScroll:Date?
+            
+            if self.isDateInCurrentSegment(date: self.selectedDate) {
+                dateToScroll = self.selectedDate
+            }
+            else {
+                dateToScroll = self.weekCurrent
+            }
+            
+            self.calendarView.scrollToDate(dateToScroll!, animateScroll:false, completionHandler: {
+                self.calendarView.selectDates([self.selectedDate])
+            })
+            
             UIView.animate(withDuration: 0.8, animations: {
-                self.calendarView.scrollToDate(self.weekCurrent, animateScroll:false, completionHandler: {
-                    self.calendarView.selectDates([self.selectedDate])
-                })
-                
                 self.calendarView.transform = CGAffineTransform(translationX: 0, y: 0)
                 self.recordListView.transform = CGAffineTransform(translationX: 0, y: 54*6)
             }, completion:{ (finished) in
+                
+                
 //                print("folddepth = ", self.calFoldDepth, " transformy = ",  0-54*self.calFoldDepth, "frame = ", self.calendarView.frame)
             })
             
@@ -232,13 +253,22 @@ class ViewController: UIViewController {
             break
         case.month:
             calMode = .week
+            
+            var dateToScroll:Date?
+            if isDateInCurrentSegment(date: self.selectedDate) {
+                dateToScroll = self.selectedDate
+            }
+            else {
+                dateToScroll = self.weekCurrent
+            }
+            
             UIView.animate(withDuration: 0.8, animations: {
                 self.calendarView.transform = CGAffineTransform(translationX: 0, y: 0-CGFloat(self.calFoldDepth*54))
                 self.recordListView.transform = CGAffineTransform(translationX: 0, y: 0)
             }, completion: { (finished) in
                 self.calendarView.reloadData()
                 self.calendarView.frame = CGRect(x:0,y:120,width:self.calendarView.frame.width,height:54)
-                self.calendarView.scrollToDate(self.weekCurrent, animateScroll:false, completionHandler: {
+                self.calendarView.scrollToDate(dateToScroll!, animateScroll:false, completionHandler: {
                     self.calendarView.selectDates([self.selectedDate])
                 })
                 self.offsetYCal = 0
@@ -307,7 +337,11 @@ extension ViewController: JTAppleCalendarViewDelegate,JTAppleCalendarViewDataSou
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        self.selectedDate = date
         guard let cellView = cell as? UTKUICalendarCellView else {return}
+        weekCurrent = firstDayOfSegment()
+        calFoldDepth = selectedDateWeekOfMonth()
+        print("selectdate weekcurrent = ", weekCurrent, " foldDepth = ", calFoldDepth)
         if cellState.isSelected && cellState.dateBelongsTo == .thisMonth && cellView.selectedNoter.alpha < 0.5{
             UIView.animate(withDuration: 0.4, animations: {
                 cellView.selectedNoter.alpha = 1
@@ -315,14 +349,12 @@ extension ViewController: JTAppleCalendarViewDelegate,JTAppleCalendarViewDataSou
         }
         else if cellState.isSelected && cellState.dateBelongsTo == .followingMonthWithinBoundary && calMode == .month{
             calendar.scrollToSegment(.next, completionHandler: {
-                self.selectedDate = date
                 calendar.selectDates([self.selectedDate])
             })
             
         }
         else if cellState.isSelected && cellState.dateBelongsTo == .previousMonthWithinBoundary && calMode == .month{
             calendar.scrollToSegment(.previous, completionHandler: {
-                self.selectedDate = date
                 calendar.selectDates([self.selectedDate])
             })
         }
@@ -332,6 +364,7 @@ extension ViewController: JTAppleCalendarViewDelegate,JTAppleCalendarViewDataSou
             })
         }
         self.dateLabel.text = dateFormatter.string(from: date)
+        
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date:
@@ -379,6 +412,52 @@ extension ViewController: JTAppleCalendarViewDelegate,JTAppleCalendarViewDataSou
         cellView.dayLabel.text = cellState.text
     }
     
+    func isDateInCurrentSegment(date:Date) -> Bool {
+        let visibleDates = self.calendarView.visibleDates()
+        let dateStart:Date!
+        let dateStop:Date!
+        
+        if visibleDates.indates.count > 0 {
+            dateStart = visibleDates.indates[0].date
+        }
+        else if visibleDates.monthDates.count > 0 {
+            dateStart = visibleDates.monthDates[0].date
+        }
+        else if visibleDates.outdates.count > 0 {
+            dateStart = visibleDates.outdates[0].date
+        }
+        else {
+            dateStart = nil
+        }
+        
+        if visibleDates.outdates.count > 0 {
+            dateStop = visibleDates.outdates[visibleDates.outdates.count-1].date
+        }
+        else if visibleDates.monthDates.count > 0 {
+            dateStop = visibleDates.monthDates[visibleDates.monthDates.count-1].date
+        }
+        else if visibleDates.indates.count > 0 {
+            dateStop = visibleDates.indates[visibleDates.indates.count-1].date
+        }
+        else {
+            dateStop = nil
+        }
+        
+        if dateStart == nil || dateStop == nil {
+            return false
+        }
+        else {
+            dateFormatter.dateFormat = "yyyyMMdd"
+            let dateStr = dateFormatter.string(from: date)
+            let dateStartStr = dateFormatter.string(from: dateStart)
+            let dateStopStr = dateFormatter.string(from: dateStop)
+            
+            return dateStr >= dateStartStr && dateStr <= dateStopStr
+        }
+        
+    }
+    
+    //if today is in this month
     func isThisMonth() -> Bool {
         let today = Date()
         dateFormatter.dateFormat = "yyyy"
@@ -397,6 +476,9 @@ extension ViewController: JTAppleCalendarViewDelegate,JTAppleCalendarViewDataSou
         }
     }
     
+    func selectedDateWeekOfMonth() -> Int {
+        return self.selectedDate.weekOfMonth() - 1
+    }
     //which week should be the init display week of the month when the calendar is transferring from month to week mode
     func initWeekOfMonth() -> Int{
         if calendarView.visibleDates().indates.count > 0 {
