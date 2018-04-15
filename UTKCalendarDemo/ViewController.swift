@@ -203,16 +203,6 @@ class ViewController: UIViewController {
                             self.offsetYCal = 0
                             self.offsetYRec = 0
                             
-//                            self.calendarView.scrollToDate(dateToScroll!, animateScroll: false,completionHandler: {
-//
-//                                self.calendarView.selectDates([self.selectedDate])
-//                                self.weekCurrent = self.firstDayOfSegment()
-//                                self.calFoldDepth = self.initWeekOfMonth()
-//                                self.calendarView.transform = CGAffineTransform.identity
-//                                self.calendarView.frame = CGRect(x:0,y:120,width:self.calendarView.frame.width,height:54)
-//                                self.offsetYRec = 0
-//                                self.offsetYCal = 0 - CGFloat(self.calFoldDepth)*CGFloat(54)
-//                            })
                         })
                         
                         
@@ -245,26 +235,26 @@ class ViewController: UIViewController {
         case.week:
             var dateToScroll:Date?
             
+            //update weekCurrent & calcFoldDepth
+            weekCurrent = firstDayOfSegment()
+            
             if self.isDateInCurrentSegment(date: self.selectedDate) {
                 dateToScroll = self.selectedDate
             }
             else {
                 dateToScroll = self.weekCurrent
             }
+            //非选择日期所属月份直接返回0
+            calFoldDepth = initWeekOfMonth()
             
             calMode = .month
-            weekCurrent = firstDayOfSegment()
-            calFoldDepth = initWeekOfMonth()
-            print("weekcurrent = ", weekCurrent, " foldDepth = ", calFoldDepth)
-            
+    
             self.calendarView.reloadData()
             
             self.calendarView.transform = CGAffineTransform.identity
             self.calendarView.frame = CGRect(x:0,y:120,width:self.calendarView.frame.width,height:54*6)
             
             self.calendarView.transform = CGAffineTransform(translationX: 0, y: 0-CGFloat(self.calFoldDepth*54))
-            
-            
             
             self.calendarView.scrollToDate(dateToScroll!, animateScroll:false, completionHandler: {
                 self.calendarView.selectDates([self.selectedDate])
@@ -276,7 +266,6 @@ class ViewController: UIViewController {
             }, completion:{ (finished) in
                 self.offsetYRec = CGFloat(54*6)
                 self.offsetYCal = 0
-//                print("folddepth = ", self.calFoldDepth, " transformy = ",  0-54*self.calFoldDepth, "frame = ", self.calendarView.frame)
             })
             
             
