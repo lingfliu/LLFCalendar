@@ -43,10 +43,10 @@ class ViewController: UIViewController {
         recordListView = UITableView(frame:CGRect(x:0,y:174,width:rootFrame.size.width, height:rootFrame.size.height-174))
         self.view.addSubview(recordListView)
         
-        calendarView.calendarDataSource = self
-        calendarView.calendarDelegate = self
-        let nib = UINib(nibName: "UTKUICalendarCell", bundle: Bundle.main)
-        calendarView.register(nib, forCellWithReuseIdentifier: calReuseId)
+//        calendarView.calendarDataSource = self
+//        calendarView.calendarDelegate = self
+//        let nib = UINib(nibName: "UTKUICalendarCell", bundle: Bundle.main)
+//        calendarView.register(nib, forCellWithReuseIdentifier: calReuseId)
         
         calendarView.minimumLineSpacing = 0
         calendarView.minimumInteritemSpacing = 0
@@ -96,8 +96,8 @@ class ViewController: UIViewController {
                         if offsetY > 54 {
                             //switch to month mode
                             //backup current for restore
-                            weekCurrent = firstDayOfSegment()
-                            calFoldDepth = initWeekOfMonth()
+//                            weekCurrent = firstDayOfSegment()
+//                            calFoldDepth = initWeekOfMonth()
                             calMode = .month
                             
                             UIView.animate(withDuration: 0.6, animations: {
@@ -178,13 +178,13 @@ class ViewController: UIViewController {
                     offsetYRec = offsetY + offsetYRec < 0 ? 0 : offsetY + offsetYRec
                     offsetYCal = offsetYRec - CGFloat(calFoldDepth)*CGFloat(54) > 0 ? 0 : offsetYRec - CGFloat(calFoldDepth)*CGFloat(54)
                     
-                    var dateToScroll:Date?
-                    if isDateInCurrentSegment(date: self.selectedDate) {
-                        dateToScroll = self.selectedDate
-                    }
-                    else {
-                        dateToScroll = self.weekCurrent
-                    }
+//                    var dateToScroll:Date?
+//                    if isDateInCurrentSegment(date: self.selectedDate) {
+//                        dateToScroll = self.selectedDate
+//                    }
+//                    else {
+//                        dateToScroll = self.weekCurrent
+//                    }
                     
                     if offsetYRec <= 54 {
                         //pushed back to week mode
@@ -197,9 +197,9 @@ class ViewController: UIViewController {
                             self.calendarView.reloadData()
                             self.calendarView.transform = CGAffineTransform.identity
                             self.calendarView.frame = CGRect(x:0,y:120,width:self.calendarView.frame.width,height:54)
-                            self.calendarView.scrollToDate(dateToScroll!, animateScroll:false, completionHandler: {
-                                self.calendarView.selectDates([self.selectedDate])
-                            })
+//                            self.calendarView.scrollToDate(dateToScroll!, animateScroll:false, completionHandler: {
+//                                self.calendarView.selectDates([self.selectedDate])
+//                            })
                             self.offsetYCal = 0
                             self.offsetYRec = 0
                             
@@ -236,16 +236,16 @@ class ViewController: UIViewController {
             var dateToScroll:Date?
             
             //update weekCurrent & calcFoldDepth
-            weekCurrent = firstDayOfSegment()
+//            weekCurrent = firstDayOfSegment()
             
-            if self.isDateInCurrentSegment(date: self.selectedDate) {
-                dateToScroll = self.selectedDate
-            }
-            else {
-                dateToScroll = self.weekCurrent
-            }
+//            if self.isDateInCurrentSegment(date: self.selectedDate) {
+//                dateToScroll = self.selectedDate
+//            }
+//            else {
+//                dateToScroll = self.weekCurrent
+//            }
             //非选择日期所属月份直接返回0
-            calFoldDepth = initWeekOfMonth()
+//            calFoldDepth = initWeekOfMonth()
             
             calMode = .month
     
@@ -271,16 +271,16 @@ class ViewController: UIViewController {
             
             break
         case.month:
-            self.weekCurrent = firstDayOfSegment()
+//            self.weekCurrent = firstDayOfSegment()
             
             var dateToScroll:Date?
-            if isDateInCurrentSegment(date: self.selectedDate) {
-                dateToScroll = self.selectedDate
-            }
-            else {
-                dateToScroll = self.weekCurrent
-            }
-            self.calFoldDepth = initWeekOfMonth(date:dateToScroll!)
+//            if isDateInCurrentSegment(date: self.selectedDate) {
+//                dateToScroll = self.selectedDate
+//            }
+//            else {
+//                dateToScroll = self.weekCurrent
+//            }
+//            self.calFoldDepth = initWeekOfMonth(date:dateToScroll!)
             
             calMode = .week
             
@@ -318,242 +318,242 @@ extension ViewController: UIGestureRecognizerDelegate {
     }
 }
 
-extension ViewController: JTAppleCalendarViewDelegate,JTAppleCalendarViewDataSource {
-    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-        dateFormatter.dateFormat = "yyyy MM dd"
-        dateFormatter.timeZone = Calendar.current.timeZone
-        dateFormatter.locale = Calendar.current.locale
-        
-        var numRow = 1
-        switch calMode {
-        case.week:
-            numRow = 1
-            break
-        case.month:
-            numRow = 6
-            break
-        }
-        
-        let startTime = dateFormatter.date(from: "2014 01 01")!
-        let stopTime = dateFormatter.date(from: "2100 12 31")!
-        let parameters = ConfigurationParameters(startDate: startTime, endDate: stopTime, numberOfRows: numRow, calendar: Calendar.current, generateInDates: InDateCellGeneration.forAllMonths, generateOutDates: OutDateCellGeneration.tillEndOfGrid, firstDayOfWeek: .sunday, hasStrictBoundaries: false)
-        
-        return parameters
-    }
-    
-    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
-        if calMode == .week {
-            if visibleDates.indates.count > 0 {
-                dateLabel.text = dateFormatter.string(for:visibleDates.indates[0].date)
-            }
-            else if visibleDates.monthDates.count > 0 {
-                dateLabel.text = dateFormatter.string(for:visibleDates.monthDates[0].date)
-
-            }
-            else {
-                dateLabel.text = dateFormatter.string(for:visibleDates.outdates[0].date)
-            }
-        }
-        else {
-            dateLabel.text = dateFormatter.string(for:visibleDates.monthDates[0].date)
-        }
-        
-        //update folddepth and weekcurrent when segment changes
-        if calMode == .month {
-            if !isDateInCurrentSegment(date: selectedDate) {
-                calFoldDepth = 0
-                weekCurrent = firstDayOfSegment()
-            }
-        }
-        else {
-            if !isDateInCurrentSegment(date: selectedDate) {
-                calFoldDepth = initWeekOfMonth()
-//                weekCurrent = firstDayOfSegment()
-            }
-        }
-    }
-    
-    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        self.selectedDate = date
-        guard let cellView = cell as? UTKUICalendarCellView else {return}
-        weekCurrent = firstDayOfSegment()
-        calFoldDepth = selectedDateWeekOfMonth()
-        print("selectdate weekcurrent = ", weekCurrent, " foldDepth = ", calFoldDepth)
-        if cellState.isSelected && cellState.dateBelongsTo == .thisMonth && cellView.selectedNoter.alpha < 0.5{
-            UIView.animate(withDuration: 0.4, animations: {
-                cellView.selectedNoter.alpha = 1
-            })
-        }
-        else if cellState.isSelected && cellState.dateBelongsTo == .followingMonthWithinBoundary && calMode == .month{
-            calendar.scrollToSegment(.next, completionHandler: {
-                calendar.selectDates([self.selectedDate])
-            })
-            
-        }
-        else if cellState.isSelected && cellState.dateBelongsTo == .previousMonthWithinBoundary && calMode == .month{
-            calendar.scrollToSegment(.previous, completionHandler: {
-                calendar.selectDates([self.selectedDate])
-            })
-        }
-        else if cellState.isSelected && calMode == .week {
-            UIView.animate(withDuration: 0.4, animations: {
-                cellView.selectedNoter.alpha = 1
-            })
-        }
-        self.dateLabel.text = dateFormatter.string(from: date)
-        
-    }
-    
-    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date:
-        Date, cell: JTAppleCell?, cellState: CellState) {
-        guard let cellView = cell as? UTKUICalendarCellView else {return}
-        if (cellState.dateBelongsTo == .thisMonth || cellState.dateBelongsTo == .followingMonthWithinBoundary || cellState.dateBelongsTo == .previousMonthWithinBoundary) && calMode == .month && cellView.selectedNoter.alpha > 0.5{
-            cellView.selectedNoter.alpha = 0
-        }
-        else if calMode == .week && cellView.selectedNoter.alpha > 0.5{
-            cellView.selectedNoter.alpha = 0
-        }
-    }
-    func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
-        let cellView  = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: calReuseId, for: indexPath) as! UTKUICalendarCellView
-        if cellState.dateBelongsTo == .thisMonth  && cellState.isSelected{
-            UIView.animate(withDuration: 0.4, animations: {
-                cellView.selectedNoter.alpha = 1
-            })
-        }
-        else if (cellState.dateBelongsTo == .thisMonth || cellState.dateBelongsTo == .followingMonthWithinBoundary || cellState.dateBelongsTo == .previousMonthWithinBoundary)
-            && !cellState.isSelected && cellView.selectedNoter.alpha > 0{
-            UIView.animate(withDuration: 0.4, animations: {
-                cellView.selectedNoter.alpha = 0
-            })
-        }
-        cellView.dayLabel.text = cellState.text
-        return cellView
-    }
-    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
-        let cellView  = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: calReuseId, for: indexPath) as! UTKUICalendarCellView
-        if cellState.dateBelongsTo == .thisMonth  && cellState.isSelected{
-            UIView.animate(withDuration: 0.4, animations: {
-                cellView.selectedNoter.alpha = 1
-            })
-        }
-        else if cellState.dateBelongsTo == .thisMonth && !cellState.isSelected && cellView.selectedNoter.alpha > 0{
-            UIView.animate(withDuration: 0.4, animations: {
-                cellView.selectedNoter.alpha = 0
-            })
-        }
-        cellView.dayLabel.text = cellState.text
-    }
-    
-    func isDateInCurrentSegment(date:Date) -> Bool {
-        let visibleDates = self.calendarView.visibleDates()
-        let dateStart:Date!
-        let dateStop:Date!
-        
-        switch calMode {
-        case.week:
-            if visibleDates.indates.count > 0 {
-                dateStart = visibleDates.indates[0].date
-            }
-            else if visibleDates.monthDates.count > 0 {
-                dateStart = visibleDates.monthDates[0].date
-            }
-            else if visibleDates.outdates.count > 0 {
-                dateStart = visibleDates.outdates[0].date
-            }
-            else {
-                dateStart = nil
-            }
-            
-            if visibleDates.outdates.count > 0 {
-                dateStop = visibleDates.outdates[visibleDates.outdates.count-1].date
-            }
-            else if visibleDates.monthDates.count > 0 {
-                dateStop = visibleDates.monthDates[visibleDates.monthDates.count-1].date
-            }
-            else if visibleDates.indates.count > 0 {
-                dateStop = visibleDates.indates[visibleDates.indates.count-1].date
-            }
-            else {
-                dateStop = nil
-            }
-            break
-        case.month:
-            dateStart = visibleDates.monthDates[0].date
-            dateStop = visibleDates.monthDates[visibleDates.monthDates.count-1].date
-            break
-        }
-        
-        if dateStart == nil || dateStop == nil {
-            return false
-        }
-        else {
-            dateFormatter.dateFormat = "yyyyMMdd"
-            let dateStr = dateFormatter.string(from: date)
-            let dateStartStr = dateFormatter.string(from: dateStart)
-            let dateStopStr = dateFormatter.string(from: dateStop)
-            
-            return dateStr >= dateStartStr && dateStr <= dateStopStr
-        }
-        
-    }
-    
-    //if today is in this month
-    func isThisMonth() -> Bool {
-        let today = Date()
-        dateFormatter.dateFormat = "yyyy"
-        let yearStr = dateFormatter.string(from: calendarView.visibleDates().monthDates[0].date)
-        let yearTodayStr = dateFormatter.string(from: today)
-        
-        dateFormatter.dateFormat = "MM"
-        let monthStr = dateFormatter.string(from: calendarView.visibleDates().monthDates[0].date)
-        let monthTodayStr = dateFormatter.string(from: today)
-
-        if (yearStr == yearTodayStr && monthStr == monthTodayStr) {
-            return true
-        }
-        else {
-            return false
-        }
-    }
-    
-    func selectedDateWeekOfMonth() -> Int {
-        return self.selectedDate.weekOfMonth() - 1
-    }
-    //which week should be the init display week of the month when the calendar is transferring from month to week mode
-    func initWeekOfMonth(date:Date?=nil) -> Int{
-        if date == nil {
-            if calendarView.visibleDates().indates.count > 0 && calendarView.visibleDates().monthDates.count > 0{
-                return calendarView.visibleDates().monthDates[0].date.weekOfMonth() - 1
-            }
-            else if calendarView.visibleDates().monthDates.count > 0 {
-                return calendarView.visibleDates().monthDates[0].date.weekOfMonth() - 1
-            }
-            else if calendarView.visibleDates().outdates.count > 0{
-                return calendarView.visibleDates().outdates[0].date.weekOfMonth() - 1
-            }
-            else {
-                return 0
-            }
-        }
-        else {
-            return date!.weekOfMonth()-1
-        }
-    }
-    
-    //which week should be the init display week of the month when the calendar is transferring from month to week mode
-    func firstDayOfSegment() -> Date{
-//        if calendarView.visibleDates().indates.count > 0 {
-//            return calendarView.visibleDates().indates[0].date
+//extension ViewController: JTAppleCalendarViewDelegate,JTAppleCalendarViewDataSource {
+//    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
+//        dateFormatter.dateFormat = "yyyy MM dd"
+//        dateFormatter.timeZone = Calendar.current.timeZone
+//        dateFormatter.locale = Calendar.current.locale
+//
+//        var numRow = 1
+//        switch calMode {
+//        case.week:
+//            numRow = 1
+//            break
+//        case.month:
+//            numRow = 6
+//            break
 //        }
-        if calendarView.visibleDates().monthDates.count > 0 {
-            return calendarView.visibleDates().monthDates[0].date
-        }
-        else {
-            return calendarView.visibleDates().outdates[0].date
-        }
-    }
-}
+//
+//        let startTime = dateFormatter.date(from: "2014 01 01")!
+//        let stopTime = dateFormatter.date(from: "2100 12 31")!
+//        let parameters = ConfigurationParameters(startDate: startTime, endDate: stopTime, numberOfRows: numRow, calendar: Calendar.current, generateInDates: InDateCellGeneration.forAllMonths, generateOutDates: OutDateCellGeneration.tillEndOfGrid, firstDayOfWeek: .sunday, hasStrictBoundaries: false)
+//
+//        return parameters
+//    }
+//
+//    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
+//        if calMode == .week {
+//            if visibleDates.indates.count > 0 {
+//                dateLabel.text = dateFormatter.string(for:visibleDates.indates[0].date)
+//            }
+//            else if visibleDates.monthDates.count > 0 {
+//                dateLabel.text = dateFormatter.string(for:visibleDates.monthDates[0].date)
+//
+//            }
+//            else {
+//                dateLabel.text = dateFormatter.string(for:visibleDates.outdates[0].date)
+//            }
+//        }
+//        else {
+//            dateLabel.text = dateFormatter.string(for:visibleDates.monthDates[0].date)
+//        }
+//
+//        //update folddepth and weekcurrent when segment changes
+//        if calMode == .month {
+//            if !isDateInCurrentSegment(date: selectedDate) {
+//                calFoldDepth = 0
+//                weekCurrent = firstDayOfSegment()
+//            }
+//        }
+//        else {
+//            if !isDateInCurrentSegment(date: selectedDate) {
+//                calFoldDepth = initWeekOfMonth()
+////                weekCurrent = firstDayOfSegment()
+//            }
+//        }
+//    }
+//
+//    func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+//        self.selectedDate = date
+//        guard let cellView = cell as? UTKUICalendarCellView else {return}
+//        weekCurrent = firstDayOfSegment()
+//        calFoldDepth = selectedDateWeekOfMonth()
+//        print("selectdate weekcurrent = ", weekCurrent, " foldDepth = ", calFoldDepth)
+//        if cellState.isSelected && cellState.dateBelongsTo == .thisMonth && cellView.selectedNoter.alpha < 0.5{
+//            UIView.animate(withDuration: 0.4, animations: {
+//                cellView.selectedNoter.alpha = 1
+//            })
+//        }
+//        else if cellState.isSelected && cellState.dateBelongsTo == .followingMonthWithinBoundary && calMode == .month{
+//            calendar.scrollToSegment(.next, completionHandler: {
+//                calendar.selectDates([self.selectedDate])
+//            })
+//
+//        }
+//        else if cellState.isSelected && cellState.dateBelongsTo == .previousMonthWithinBoundary && calMode == .month{
+//            calendar.scrollToSegment(.previous, completionHandler: {
+//                calendar.selectDates([self.selectedDate])
+//            })
+//        }
+//        else if cellState.isSelected && calMode == .week {
+//            UIView.animate(withDuration: 0.4, animations: {
+//                cellView.selectedNoter.alpha = 1
+//            })
+//        }
+//        self.dateLabel.text = dateFormatter.string(from: date)
+//
+//    }
+//
+//    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date:
+//        Date, cell: JTAppleCell?, cellState: CellState) {
+//        guard let cellView = cell as? UTKUICalendarCellView else {return}
+//        if (cellState.dateBelongsTo == .thisMonth || cellState.dateBelongsTo == .followingMonthWithinBoundary || cellState.dateBelongsTo == .previousMonthWithinBoundary) && calMode == .month && cellView.selectedNoter.alpha > 0.5{
+//            cellView.selectedNoter.alpha = 0
+//        }
+//        else if calMode == .week && cellView.selectedNoter.alpha > 0.5{
+//            cellView.selectedNoter.alpha = 0
+//        }
+//    }
+//    func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
+//        let cellView  = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: calReuseId, for: indexPath) as! UTKUICalendarCellView
+//        if cellState.dateBelongsTo == .thisMonth  && cellState.isSelected{
+//            UIView.animate(withDuration: 0.4, animations: {
+//                cellView.selectedNoter.alpha = 1
+//            })
+//        }
+//        else if (cellState.dateBelongsTo == .thisMonth || cellState.dateBelongsTo == .followingMonthWithinBoundary || cellState.dateBelongsTo == .previousMonthWithinBoundary)
+//            && !cellState.isSelected && cellView.selectedNoter.alpha > 0{
+//            UIView.animate(withDuration: 0.4, animations: {
+//                cellView.selectedNoter.alpha = 0
+//            })
+//        }
+//        cellView.dayLabel.text = cellState.text
+//        return cellView
+//    }
+//    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
+//        let cellView  = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: calReuseId, for: indexPath) as! UTKUICalendarCellView
+//        if cellState.dateBelongsTo == .thisMonth  && cellState.isSelected{
+//            UIView.animate(withDuration: 0.4, animations: {
+//                cellView.selectedNoter.alpha = 1
+//            })
+//        }
+//        else if cellState.dateBelongsTo == .thisMonth && !cellState.isSelected && cellView.selectedNoter.alpha > 0{
+//            UIView.animate(withDuration: 0.4, animations: {
+//                cellView.selectedNoter.alpha = 0
+//            })
+//        }
+//        cellView.dayLabel.text = cellState.text
+//    }
+//
+//    func isDateInCurrentSegment(date:Date) -> Bool {
+//        let visibleDates = self.calendarView.visibleDates()
+//        let dateStart:Date!
+//        let dateStop:Date!
+//
+//        switch calMode {
+//        case.week:
+//            if visibleDates.indates.count > 0 {
+//                dateStart = visibleDates.indates[0].date
+//            }
+//            else if visibleDates.monthDates.count > 0 {
+//                dateStart = visibleDates.monthDates[0].date
+//            }
+//            else if visibleDates.outdates.count > 0 {
+//                dateStart = visibleDates.outdates[0].date
+//            }
+//            else {
+//                dateStart = nil
+//            }
+//
+//            if visibleDates.outdates.count > 0 {
+//                dateStop = visibleDates.outdates[visibleDates.outdates.count-1].date
+//            }
+//            else if visibleDates.monthDates.count > 0 {
+//                dateStop = visibleDates.monthDates[visibleDates.monthDates.count-1].date
+//            }
+//            else if visibleDates.indates.count > 0 {
+//                dateStop = visibleDates.indates[visibleDates.indates.count-1].date
+//            }
+//            else {
+//                dateStop = nil
+//            }
+//            break
+//        case.month:
+//            dateStart = visibleDates.monthDates[0].date
+//            dateStop = visibleDates.monthDates[visibleDates.monthDates.count-1].date
+//            break
+//        }
+//
+//        if dateStart == nil || dateStop == nil {
+//            return false
+//        }
+//        else {
+//            dateFormatter.dateFormat = "yyyyMMdd"
+//            let dateStr = dateFormatter.string(from: date)
+//            let dateStartStr = dateFormatter.string(from: dateStart)
+//            let dateStopStr = dateFormatter.string(from: dateStop)
+//
+//            return dateStr >= dateStartStr && dateStr <= dateStopStr
+//        }
+//
+//    }
+//
+//    //if today is in this month
+//    func isThisMonth() -> Bool {
+//        let today = Date()
+//        dateFormatter.dateFormat = "yyyy"
+//        let yearStr = dateFormatter.string(from: calendarView.visibleDates().monthDates[0].date)
+//        let yearTodayStr = dateFormatter.string(from: today)
+//
+//        dateFormatter.dateFormat = "MM"
+//        let monthStr = dateFormatter.string(from: calendarView.visibleDates().monthDates[0].date)
+//        let monthTodayStr = dateFormatter.string(from: today)
+//
+//        if (yearStr == yearTodayStr && monthStr == monthTodayStr) {
+//            return true
+//        }
+//        else {
+//            return false
+//        }
+//    }
+//
+//    func selectedDateWeekOfMonth() -> Int {
+//        return self.selectedDate.weekOfMonth() - 1
+//    }
+//    //which week should be the init display week of the month when the calendar is transferring from month to week mode
+//    func initWeekOfMonth(date:Date?=nil) -> Int{
+//        if date == nil {
+//            if calendarView.visibleDates().indates.count > 0 && calendarView.visibleDates().monthDates.count > 0{
+//                return calendarView.visibleDates().monthDates[0].date.weekOfMonth() - 1
+//            }
+//            else if calendarView.visibleDates().monthDates.count > 0 {
+//                return calendarView.visibleDates().monthDates[0].date.weekOfMonth() - 1
+//            }
+//            else if calendarView.visibleDates().outdates.count > 0{
+//                return calendarView.visibleDates().outdates[0].date.weekOfMonth() - 1
+//            }
+//            else {
+//                return 0
+//            }
+//        }
+//        else {
+//            return date!.weekOfMonth()-1
+//        }
+//    }
+//
+//    //which week should be the init display week of the month when the calendar is transferring from month to week mode
+//    func firstDayOfSegment() -> Date{
+////        if calendarView.visibleDates().indates.count > 0 {
+////            return calendarView.visibleDates().indates[0].date
+////        }
+//        if calendarView.visibleDates().monthDates.count > 0 {
+//            return calendarView.visibleDates().monthDates[0].date
+//        }
+//        else {
+//            return calendarView.visibleDates().outdates[0].date
+//        }
+//    }
+//}
 
 extension Date {
     
