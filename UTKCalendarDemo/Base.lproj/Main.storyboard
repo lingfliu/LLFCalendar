@@ -1,56 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Xeh-bE-Lcp">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Test View Controller-->
-        <scene sceneID="sHV-fZ-a5K">
+        <!--Demo View Controller-->
+        <scene sceneID="fw9-EY-toh">
             <objects>
-                <viewController id="uEs-Dr-Q0e" customClass="TestViewController" customModule="UTKCalendarDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="cwb-Nj-NBO" customClass="UICollectionReusableView">
+                <viewController id="Xeh-bE-Lcp" customClass="DemoViewController" customModule="UTKCalendarDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eLV-uo-bUm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABK-DU-wMe">
-                                <rect key="frame" x="168" y="40" width="39" height="30"/>
-                                <state key="normal" title="mode"/>
-                                <connections>
-                                    <action selector="switchMode:" destination="uEs-Dr-Q0e" eventType="touchUpInside" id="yfX-8v-iZf"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfv-dm-yQt">
-                                <rect key="frame" x="0.0" y="80" width="375" height="40"/>
-                                <color key="backgroundColor" red="1" green="0.044460720486111112" blue="0.083387586805555552" alpha="0.63225064212328763" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DuQ-7o-97q" customClass="UTKUICalendarView" customModule="UTKCalendarDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="41" width="375" height="240"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="1Tc-Vz-Seb"/>
+                                    <constraint firstAttribute="height" constant="240" id="8ei-9k-UwS"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="nfv-dm-yQt" firstAttribute="trailing" secondItem="SzL-bJ-vrm" secondAttribute="trailing" id="002-R5-gRZ"/>
-                            <constraint firstItem="nfv-dm-yQt" firstAttribute="top" secondItem="ABK-DU-wMe" secondAttribute="bottom" constant="10" id="2cT-zd-kDd"/>
-                            <constraint firstItem="ABK-DU-wMe" firstAttribute="leading" secondItem="SzL-bJ-vrm" secondAttribute="leading" constant="168" id="RbP-GN-UEY"/>
-                            <constraint firstItem="nfv-dm-yQt" firstAttribute="leading" secondItem="SzL-bJ-vrm" secondAttribute="leading" id="i8Z-IJ-YB3"/>
-                            <constraint firstItem="SzL-bJ-vrm" firstAttribute="trailing" secondItem="ABK-DU-wMe" secondAttribute="trailing" constant="168" id="pt8-EL-6Mv"/>
-                            <constraint firstItem="ABK-DU-wMe" firstAttribute="top" secondItem="SzL-bJ-vrm" secondAttribute="top" constant="20" id="rFh-pl-oUQ"/>
+                            <constraint firstItem="DuQ-7o-97q" firstAttribute="leading" secondItem="vYJ-0N-wfM" secondAttribute="leading" id="SFk-cI-Wnt"/>
+                            <constraint firstItem="DuQ-7o-97q" firstAttribute="trailing" secondItem="vYJ-0N-wfM" secondAttribute="trailing" id="Tph-n7-XOv"/>
+                            <constraint firstItem="DuQ-7o-97q" firstAttribute="top" secondItem="vYJ-0N-wfM" secondAttribute="top" constant="21" id="gei-1u-GLx"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="SzL-bJ-vrm"/>
+                        <viewLayoutGuide key="safeArea" id="vYJ-0N-wfM"/>
                     </view>
-                    <connections>
-                        <outlet property="modeBtn" destination="ABK-DU-wMe" id="b7J-rq-cT8"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="drR-Ml-afd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Jr-5S-mVP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-762.39999999999998" y="160.56971514242881"/>
+            <point key="canvasLocation" x="-890.39999999999998" y="114.69265367316342"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
