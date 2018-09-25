@@ -3,6 +3,100 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "UTKUICalendarView.calendar(_:didDeselectDate:cell:cellState:):UTKUICalendarView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "UTKUICalendarView.backToday():UTKUICalendarView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.calendar(_:didDeselectDate:cell:cellState:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "calendarView.visibeDates">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in UTKUICalendarCellView.setSelected():UTKUICalendarCellView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UTKUICalendarView.calendar(_:didSelectDate:cell:cellState:):UTKUICalendarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedDateCell.date">
+            </PersistentString>
+            <PersistentString
+               value = "selectedDate">
+            </PersistentString>
+            <PersistentString
+               value = "selectedDateCell?.setUnselected()">
+            </PersistentString>
+            <PersistentString
+               value = "selectedDateCell">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UTKUICalendarCellView.setUnSelected():UTKUICalendarCellView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.selectNoter.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.calendar(_:didScrollToDateSegmentWith:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CircleBgView.layoutSubviews():CircleBgView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "UTKUICalendarView.configCell(dateCell:date:label:):UTKUICalendarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "[selectedDate]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CircleBgView.draw(_:):CircleBgView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.bounds">
+            </PersistentString>
+            <PersistentString
+               value = "transform">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "JTAppleCalendarView.handleSelectionValueChanged(_:action:indexPath:selectionType:shouldTriggerSelectionDelegate:):UICollectionViewDelegates.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath">
+            </PersistentString>
+            <PersistentString
+               value = "collectionView.cellForItem(at:indexPath)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Calendar.endOfMonth(for:):GlobalFunctionsAndExtensions.swift">
+      </ContextState>
+      <ContextState
+         contextName = "UTKUICalendarView.calendar(_:cellForItemAt:cellState:indexPath:):UTKUICalendarView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectedDate == Date()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ViewController.onSwipeCalendar(_:):ViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -14,26 +108,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "JTAppleCalendarView.handleSelectionValueChanged(_:action:indexPath:selectionType:shouldTriggerSelectionDelegate:):UICollectionViewDelegates.swift">
+         contextName = "UTKUICalendarView.layoutSubviews():UTKUICalendarView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "collectionView.cellForItem(at:indexPath)">
-            </PersistentString>
-            <PersistentString
-               value = "indexPath">
+               value = "dateFormatter.string(frome:today)">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ViewController.calendar(_:didDeselectDate:cell:cellState:):ViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "calendarView.visibeDates">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ViewController.calendar(_:didScrollToDateSegmentWith:):ViewController.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

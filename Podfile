@@ -4,7 +4,7 @@
 target 'UTKCalendarDemo' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'JTAppleCalendar', '~> 7.0'
+  pod 'JTAppleCalendar', '~> 7.1.5'
   # Pods for UTKCalendarDemo
 
   target 'UTKCalendarDemoTests' do

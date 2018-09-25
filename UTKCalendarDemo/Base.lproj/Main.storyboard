@@ -18,22 +18,87 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DuQ-7o-97q" customClass="UTKUICalendarView" customModule="UTKCalendarDemo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="41" width="375" height="240"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myE-I8-BVO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <color key="backgroundColor" red="0.2187529621717893" green="0.82371673652903021" blue="0.86240878807106602" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84h-wC-pdy">
+                                <rect key="frame" x="164" y="529" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="setCalendarBackToday:" destination="Xeh-bE-Lcp" eventType="touchUpInside" id="Aka-1M-NOC"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agJ-9C-pgG">
+                                <rect key="frame" x="164" y="500" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FD2-ml-G3c">
+                                <rect key="frame" x="225" y="500" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgA-4K-YZa">
+                                <rect key="frame" x="172" y="567" width="30" height="30"/>
+                                <state key="normal" title="Fold"/>
+                                <connections>
+                                    <action selector="foldCalendar:" destination="Xeh-bE-Lcp" eventType="touchUpInside" id="566-Xy-CIj"/>
+                                </connections>
+                            </button>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D39-jH-rcV" customClass="CircleBgView" customModule="UTKCalendarDemo" customModuleProvider="target">
+                                <rect key="frame" x="274" y="567" width="101" height="100"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hml-My-kyJ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="360"/>
+                                <subviews>
+                                    <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DuQ-7o-97q" customClass="UTKUICalendarView" customModule="UTKCalendarDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="360"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="8ei-9k-UwS"/>
+                                    <constraint firstItem="DuQ-7o-97q" firstAttribute="top" secondItem="Hml-My-kyJ" secondAttribute="top" id="XbJ-ay-qtS"/>
+                                    <constraint firstItem="DuQ-7o-97q" firstAttribute="leading" secondItem="Hml-My-kyJ" secondAttribute="leading" id="cUd-7J-FQ3"/>
+                                    <constraint firstAttribute="trailing" secondItem="DuQ-7o-97q" secondAttribute="trailing" id="gwt-NP-qs7"/>
+                                    <constraint firstAttribute="bottom" secondItem="DuQ-7o-97q" secondAttribute="bottom" id="kJb-3w-iTC"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="DuQ-7o-97q" firstAttribute="leading" secondItem="vYJ-0N-wfM" secondAttribute="leading" id="SFk-cI-Wnt"/>
-                            <constraint firstItem="DuQ-7o-97q" firstAttribute="trailing" secondItem="vYJ-0N-wfM" secondAttribute="trailing" id="Tph-n7-XOv"/>
-                            <constraint firstItem="DuQ-7o-97q" firstAttribute="top" secondItem="vYJ-0N-wfM" secondAttribute="top" constant="21" id="gei-1u-GLx"/>
+                            <constraint firstItem="agJ-9C-pgG" firstAttribute="baseline" secondItem="FD2-ml-G3c" secondAttribute="baseline" id="2Pu-mq-7de"/>
+                            <constraint firstItem="agJ-9C-pgG" firstAttribute="top" secondItem="Hml-My-kyJ" secondAttribute="bottom" constant="76" id="5ok-Wt-FeI"/>
+                            <constraint firstItem="myE-I8-BVO" firstAttribute="leading" secondItem="Hml-My-kyJ" secondAttribute="leading" id="Dlp-cv-OPE"/>
+                            <constraint firstItem="myE-I8-BVO" firstAttribute="trailing" secondItem="Hml-My-kyJ" secondAttribute="trailing" id="MDJ-kp-0gl"/>
+                            <constraint firstItem="myE-I8-BVO" firstAttribute="top" secondItem="eLV-uo-bUm" secondAttribute="top" id="RBZ-Ax-FDQ"/>
+                            <constraint firstItem="84h-wC-pdy" firstAttribute="centerX" secondItem="Hml-My-kyJ" secondAttribute="centerX" id="UHI-sk-bQr"/>
+                            <constraint firstItem="84h-wC-pdy" firstAttribute="top" secondItem="agJ-9C-pgG" secondAttribute="bottom" constant="8" symbolic="YES" id="ViS-Jf-aZW"/>
+                            <constraint firstItem="agJ-9C-pgG" firstAttribute="leading" secondItem="84h-wC-pdy" secondAttribute="leading" id="W4D-1z-2Cy"/>
+                            <constraint firstItem="Hml-My-kyJ" firstAttribute="top" secondItem="eLV-uo-bUm" secondAttribute="top" constant="64" id="cf7-tW-Qnr"/>
+                            <constraint firstItem="HgA-4K-YZa" firstAttribute="top" secondItem="84h-wC-pdy" secondAttribute="bottom" constant="8" symbolic="YES" id="gwl-xf-NZw"/>
+                            <constraint firstAttribute="trailing" secondItem="Hml-My-kyJ" secondAttribute="trailing" id="h6N-2m-9Hd"/>
+                            <constraint firstItem="84h-wC-pdy" firstAttribute="centerX" secondItem="HgA-4K-YZa" secondAttribute="centerX" id="jMA-6b-zdk"/>
+                            <constraint firstItem="FD2-ml-G3c" firstAttribute="leading" secondItem="agJ-9C-pgG" secondAttribute="trailing" constant="19" id="lUa-QY-cEr"/>
+                            <constraint firstItem="Hml-My-kyJ" firstAttribute="top" secondItem="myE-I8-BVO" secondAttribute="bottom" id="nrS-eI-5yC"/>
+                            <constraint firstItem="D39-jH-rcV" firstAttribute="leading" secondItem="HgA-4K-YZa" secondAttribute="trailing" constant="72" id="rEB-Tq-YBG"/>
+                            <constraint firstItem="HgA-4K-YZa" firstAttribute="top" secondItem="D39-jH-rcV" secondAttribute="top" id="tde-xC-KVb"/>
+                            <constraint firstAttribute="bottom" secondItem="Hml-My-kyJ" secondAttribute="bottom" constant="243" id="tq9-Py-de9"/>
+                            <constraint firstItem="Hml-My-kyJ" firstAttribute="leading" secondItem="eLV-uo-bUm" secondAttribute="leading" id="u4o-El-qna"/>
+                            <constraint firstItem="D39-jH-rcV" firstAttribute="trailing" secondItem="Hml-My-kyJ" secondAttribute="trailing" id="vLE-Su-r4B"/>
+                            <constraint firstItem="D39-jH-rcV" firstAttribute="bottom" secondItem="vYJ-0N-wfM" secondAttribute="bottom" id="wzB-aV-Um5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vYJ-0N-wfM"/>
                     </view>
+                    <connections>
+                        <outlet property="calendar" destination="DuQ-7o-97q" id="1Kk-cf-plT"/>
+                        <outlet property="monthLabel" destination="FD2-ml-G3c" id="W9e-Bz-zjj"/>
+                        <outlet property="today" destination="84h-wC-pdy" id="jKe-co-QDO"/>
+                        <outlet property="yearLabel" destination="agJ-9C-pgG" id="beg-ux-7Qe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Jr-5S-mVP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
